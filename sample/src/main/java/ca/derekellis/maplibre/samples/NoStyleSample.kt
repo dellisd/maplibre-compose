@@ -1,10 +1,15 @@
 package ca.derekellis.maplibre.samples
 
+import androidx.compose.animation.core.RepeatMode
+import androidx.compose.animation.core.animateFloat
+import androidx.compose.animation.core.infiniteRepeatable
+import androidx.compose.animation.core.rememberInfiniteTransition
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.consumeWindowInsets
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import ca.derekellis.maplibre.MapLibreMap
@@ -23,6 +28,14 @@ fun NoStyleSample(navigator: Navigator) {
   Scaffold(topBar = {
     SampleAppBar(title = "No Style Sample", onNavigate = { navigator.goTo(Screen.Home) })
   }) { innerPadding ->
+    val infiniteTransition = rememberInfiniteTransition(label = "infinite")
+    val radius by infiniteTransition.animateFloat(
+      initialValue = 2f,
+      targetValue = 10f,
+      animationSpec = infiniteRepeatable(tween(1000), repeatMode = RepeatMode.Reverse),
+      label = "radius"
+    )
+
     MapLibreMap(
       modifier = Modifier.consumeWindowInsets(innerPadding),
       style = "",
@@ -35,7 +48,7 @@ fun NoStyleSample(navigator: Navigator) {
         uri = URI.create("https://raw.githubusercontent.com/georgique/world-geojson/develop/countries/canada.json")
       ) {
         CircleLayer(id = "test") {
-          circleRadius(radius = 2f)
+          circleRadius(radius = radius)
         }
       }
     }
