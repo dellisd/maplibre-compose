@@ -47,11 +47,7 @@ import kotlin.time.Duration.Companion.seconds
 @Composable
 fun BasicSample(navigator: Navigator) {
   Scaffold(topBar = {
-    Row(modifier = Modifier.windowInsetsPadding(WindowInsets.statusBars)) {
-      IconButton(onClick = { navigator.goTo(Screen.Home) }) {
-        Icon(Icons.Default.Close, contentDescription = "Close")
-      }
-    }
+    SampleAppBar(title = "Basic Sample", onNavigate = { navigator.goTo(Screen.Home) })
   }) { innerPadding ->
     val scope = rememberCoroutineScope()
 

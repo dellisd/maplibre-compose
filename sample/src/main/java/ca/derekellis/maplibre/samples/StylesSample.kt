@@ -64,11 +64,7 @@ import kotlin.math.round
 @Composable
 fun StylesSample(navigator: Navigator) {
   Scaffold(topBar = {
-    Row(modifier = Modifier.windowInsetsPadding(WindowInsets.statusBars)) {
-      IconButton(onClick = { navigator.goTo(Screen.Home) }) {
-        Icon(Icons.Default.Close, contentDescription = "Close")
-      }
-    }
+    SampleAppBar(title = "Styles Sample", onNavigate = { navigator.goTo(Screen.Home) })
   }) { innerPadding ->
     val mapState = rememberMapState(padding = innerPadding)
     var showSettings by remember { mutableStateOf(false) }
