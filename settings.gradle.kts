@@ -20,5 +20,5 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "maplibre-compose"
-include(":app")
 include(":lib")
+include(":sample")
