@@ -33,7 +33,7 @@ fun NoStyleSample(navigator: Navigator) {
       initialValue = 2f,
       targetValue = 10f,
       animationSpec = infiniteRepeatable(tween(1000), repeatMode = RepeatMode.Reverse),
-      label = "radius"
+      label = "radius",
     )
 
     MapLibreMap(
@@ -45,7 +45,7 @@ fun NoStyleSample(navigator: Navigator) {
       }
       GeoJsonSource(
         id = "test",
-        uri = URI.create("https://raw.githubusercontent.com/georgique/world-geojson/develop/countries/canada.json")
+        uri = URI.create("https://raw.githubusercontent.com/georgique/world-geojson/develop/countries/canada.json"),
       ) {
         CircleLayer(id = "test") {
           circleRadius(radius = radius)

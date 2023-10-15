@@ -6,8 +6,8 @@ import android.annotation.SuppressLint
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
-import ca.derekellis.maplibre.layers.LayerScope
 import ca.derekellis.maplibre.layers.LayerDsl
+import ca.derekellis.maplibre.layers.LayerScope
 import com.mapbox.mapboxsdk.style.expressions.Expression
 import com.mapbox.mapboxsdk.style.layers.CircleLayer
 import com.mapbox.mapboxsdk.style.layers.Property.CIRCLE_PITCH_ALIGNMENT

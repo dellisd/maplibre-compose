@@ -3,8 +3,6 @@ package ca.derekellis.maplibre
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.ExperimentalLayoutApi
-import androidx.compose.foundation.layout.consumeWindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
@@ -30,7 +28,7 @@ fun HomeScreen(navigator: Navigator) {
     ) {
       Image(
         painter = painterResource(id = R.drawable.maplibre_logo),
-        contentDescription = "MapLibre Logo"
+        contentDescription = "MapLibre Logo",
       )
       Button(onClick = { navigator.goTo(Screen.BasicSample) }) {
         Text(text = "Basic Sample")
@@ -48,7 +46,9 @@ fun HomeScreen(navigator: Navigator) {
 @Preview
 @Composable
 private fun HomeScreenPreview() {
-  HomeScreen(navigator = object : Navigator {
-    override fun goTo(screen: Screen) {}
-  })
+  HomeScreen(
+    navigator = object : Navigator {
+      override fun goTo(screen: Screen) {}
+    },
+  )
 }

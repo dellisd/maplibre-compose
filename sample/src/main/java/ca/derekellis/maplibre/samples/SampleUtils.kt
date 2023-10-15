@@ -23,8 +23,8 @@ fun SampleAppBar(title: String, onNavigate: () -> Unit) {
     },
     colors = TopAppBarDefaults.topAppBarColors(
       containerColor = MaterialTheme.colorScheme.primaryContainer.copy(
-        alpha = 0.7f
-      )
-    )
+        alpha = 0.7f,
+      ),
+    ),
   )
 }

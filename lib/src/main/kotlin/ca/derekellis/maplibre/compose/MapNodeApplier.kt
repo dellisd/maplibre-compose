@@ -1,7 +1,14 @@
 package ca.derekellis.maplibre.compose
 
 import androidx.compose.runtime.AbstractApplier
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.Composition
+import androidx.compose.runtime.Recomposer
+import ca.derekellis.maplibre.StyleScope
+import com.mapbox.mapboxsdk.maps.MapboxMap
 import com.mapbox.mapboxsdk.maps.Style
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.launch
 
 internal class MapNodeApplier(private val style: Style) : AbstractApplier<MapNode>(RootNode()) {
 
@@ -84,5 +91,22 @@ internal class MapNodeApplier(private val style: Style) : AbstractApplier<MapNod
         node.children.removeAt(index)
       }
     }
+  }
+}
+
+internal fun CoroutineScope.applySources(map: MapboxMap, style: Style, content: @Composable StyleScope.() -> Unit) {
+  val recomposer = Recomposer(coroutineContext)
+  val composition = Composition(MapNodeApplier(style), recomposer)
+
+  launch {
+    recomposer.runRecomposeAndApplyChanges()
+  }
+
+  val mapScope = object : StyleScope {
+    override val style: Style get() = style
+  }
+
+  composition.setContent {
+    mapScope.content()
   }
 }

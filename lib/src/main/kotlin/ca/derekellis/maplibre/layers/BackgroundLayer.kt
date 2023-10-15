@@ -27,6 +27,6 @@ public fun StyleScope.BackgroundLayer(
     update = {
       // TODO
     },
-    content = { scope.styles() }
+    content = { scope.styles() },
   )
 }

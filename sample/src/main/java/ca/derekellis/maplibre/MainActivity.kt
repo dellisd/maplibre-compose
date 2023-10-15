@@ -36,7 +36,8 @@ class MainActivity : ComponentActivity() {
       if (screen !is Screen.Home) {
         BackHandler {
           when (screen) {
-            Screen.Home -> { /* No-op */
+            Screen.Home -> {
+              /* No-op */
             }
 
             else -> navigator.goTo(Screen.Home)

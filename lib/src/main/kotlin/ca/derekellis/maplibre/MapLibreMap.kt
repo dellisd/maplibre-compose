@@ -13,7 +13,7 @@ import androidx.compose.ui.viewinterop.AndroidView
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.findViewTreeLifecycleOwner
-import ca.derekellis.maplibre.internal.applySources
+import ca.derekellis.maplibre.compose.applySources
 import com.mapbox.mapboxsdk.maps.MapView
 import com.mapbox.mapboxsdk.maps.MapboxMap
 import com.mapbox.mapboxsdk.maps.Style
@@ -51,7 +51,7 @@ public fun MapLibreMap(
         }
       }.apply { manageLifecycle() }
     },
-    update = { _ -> }
+    update = { _ -> },
   )
 }
 

@@ -5,17 +5,16 @@ import androidx.compose.runtime.ComposeNode
 import androidx.compose.runtime.remember
 import ca.derekellis.maplibre.compose.LayerNode
 import ca.derekellis.maplibre.compose.MapNodeApplier
-import ca.derekellis.maplibre.sources.SourceScope
 import ca.derekellis.maplibre.sources.SourceDsl
+import ca.derekellis.maplibre.sources.SourceScope
 import com.mapbox.mapboxsdk.style.layers.CircleLayer
-import com.mapbox.mapboxsdk.style.layers.PropertyFactory
 import com.mapbox.mapboxsdk.style.layers.CircleLayer as SdkCircleLayer
 
 @Composable
 @SourceDsl
 public fun SourceScope.CircleLayer(
   id: String,
-  styles: @Composable LayerScope<SdkCircleLayer>.() -> Unit = {}
+  styles: @Composable LayerScope<SdkCircleLayer>.() -> Unit = {},
 ) {
   val layer = remember { SdkCircleLayer(id, sourceId) }
   val scope = remember {
@@ -29,6 +28,6 @@ public fun SourceScope.CircleLayer(
     update = {
       // TODO
     },
-    content = { scope.styles() }
+    content = { scope.styles() },
   )
 }

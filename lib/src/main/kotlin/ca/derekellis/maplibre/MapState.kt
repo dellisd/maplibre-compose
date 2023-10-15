@@ -21,7 +21,7 @@ public class MapState(
   private val initialZoom: Double = 0.0,
   private val initialBearing: Double = 0.0,
   private val initialTilt: Double = 0.0,
-  private val initialPadding: DoubleArray = doubleArrayOf(0.0, 0.0, 0.0, 0.0)
+  private val initialPadding: DoubleArray = doubleArrayOf(0.0, 0.0, 0.0, 0.0),
 ) {
   private var _map: MapboxMap? = null
     get() {
@@ -117,7 +117,7 @@ public fun rememberMapState(
   padding: PaddingValues = PaddingValues(0.dp),
 ): MapState {
   val paddingValues = LocalDensity.current.run {
-     doubleArrayOf(
+    doubleArrayOf(
       padding.calculateLeftPadding(LayoutDirection.Ltr).toPx().toDouble(),
       padding.calculateTopPadding().toPx().toDouble(),
       padding.calculateRightPadding(LayoutDirection.Ltr).toPx().toDouble(),
