@@ -7,12 +7,14 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import com.mapbox.mapboxsdk.camera.CameraPosition
-import com.mapbox.mapboxsdk.camera.CameraUpdateFactory
+import com.mapbox.mapboxsdk.camera.CameraUpdate
 import com.mapbox.mapboxsdk.geometry.LatLng
 import com.mapbox.mapboxsdk.maps.MapboxMap
 import com.mapbox.mapboxsdk.maps.MapboxMap.OnCameraIdleListener
 import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlin.coroutines.resume
+import kotlin.time.Duration
+import kotlin.time.Duration.Companion.milliseconds
 
 public class MapState(
   private val initialTarget: LatLng = LatLng(),
@@ -64,12 +66,31 @@ public class MapState(
     }
 
   public suspend fun easeTo(
-    center: LatLng = this.target,
-  ) {
+    target: LatLng = this.target,
+    zoom: Double = this.zoom,
+    bearing: Double = this.bearing,
+    tilt: Double = this.tilt,
+    duration: Duration = 300.milliseconds,
+  ): Unit = doAnimation {
+    val cameraUpdate = object : CameraUpdate {
+      override fun getCameraPosition(mapboxMap: MapboxMap): CameraPosition =
+        CameraPosition.Builder()
+          .target(target)
+          .zoom(zoom)
+          .bearing(bearing)
+          .tilt(tilt)
+          .build()
+    }
+
+    map.easeCamera(cameraUpdate, duration.inWholeMilliseconds.toInt())
+  }
+
+  private suspend fun doAnimation(block: () -> Unit) {
     var listener: OnCameraIdleListener
     var resumed = false
+
     suspendCancellableCoroutine { continuation ->
-      map.easeCamera(CameraUpdateFactory.newLatLng(center))
+      block()
       listener = OnCameraIdleListener {
         if (!resumed) {
           continuation.resume(Unit)

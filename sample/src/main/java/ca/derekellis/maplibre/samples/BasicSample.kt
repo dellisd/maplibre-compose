@@ -30,6 +30,7 @@ import ca.derekellis.maplibre.sources.GeoJsonSource
 import com.mapbox.mapboxsdk.geometry.LatLng
 import kotlinx.coroutines.launch
 import java.net.URI
+import kotlin.time.Duration.Companion.seconds
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
@@ -76,7 +77,11 @@ fun BasicSample() {
         }
         Button(onClick = {
           scope.launch {
-            mapState.easeTo(center = LatLng(47.2639603, 11.4002649))
+            mapState.easeTo(
+              target = LatLng(47.2639603, 11.4002649),
+              zoom = 15.0,
+              duration = 1.seconds
+            )
           }
         }) {
           Text(text = "Jump To")
