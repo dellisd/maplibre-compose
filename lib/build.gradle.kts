@@ -7,6 +7,9 @@ android {
   namespace = "ca.derekellis.maplibre"
   compileSdk = 34
 
+  defaultConfig {
+    minSdk = 24
+  }
   compileOptions {
     sourceCompatibility = JavaVersion.VERSION_17
     targetCompatibility = JavaVersion.VERSION_17
@@ -29,6 +32,7 @@ kotlin {
 dependencies {
   api(libs.maplibre)
 
+  implementation(libs.lifecycle.runtime)
   implementation(platform(libs.compose.bom))
   implementation(libs.compose.foundation)
   implementation(libs.compose.runtime)
