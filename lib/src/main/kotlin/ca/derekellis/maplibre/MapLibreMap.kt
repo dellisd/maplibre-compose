@@ -21,7 +21,7 @@ import com.mapbox.mapboxsdk.maps.Style
 @Composable
 public fun MapLibreMap(
   modifier: Modifier = Modifier,
-  style: String,
+  style: String? = null,
   state: MapState = rememberMapState(),
   content: @Composable StyleScope.() -> Unit = {},
 ) {

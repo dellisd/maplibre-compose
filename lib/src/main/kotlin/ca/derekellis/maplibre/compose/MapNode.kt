@@ -6,7 +6,7 @@ import com.mapbox.mapboxsdk.style.sources.Source
 internal sealed interface MapNode
 
 internal class RootNode : MapNode {
-  val children = mutableListOf<SourceNode>()
+  val children = mutableListOf<MapNode>()
 }
 
 internal class SourceNode(var id: String, var source: Source) : MapNode {

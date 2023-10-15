@@ -8,13 +8,10 @@ internal class MapNodeApplier(private val style: Style) : AbstractApplier<MapNod
   override fun insertBottomUp(index: Int, instance: MapNode) {
     when (val node = current) {
       is LayerNode -> {
-        // TODO
       }
 
       is SourceNode -> {
         check(instance is LayerNode) { "Node must be a LayerNode" }
-//        check(style.getLayer(instance.id) == null) { "Layer with id ${instance.id} already exists in the style" }
-
         if (style.getLayer(instance.id) == null) {
           style.addLayer(instance.layer)
           node.layers.add(index, instance)
@@ -28,12 +25,16 @@ internal class MapNodeApplier(private val style: Style) : AbstractApplier<MapNod
   override fun insertTopDown(index: Int, instance: MapNode) {
     when (val node = current) {
       is RootNode -> {
-        check(instance is SourceNode) { "Node must be a SourceNode" }
-//        check(style.getSource(instance.id) == null) { "Source with id ${instance.id} already exists in the style" }
-
-        if (style.getSource(instance.id) == null) {
-          style.addSource(instance.source)
-          node.children.add(index, instance)
+        if (instance is SourceNode) {
+          if (style.getSource(instance.id) == null) {
+            style.addSource(instance.source)
+            node.children.add(index, instance)
+          }
+        } else if (instance is LayerNode) {
+          if (style.getLayer(instance.id) == null) {
+            style.addLayer(instance.layer)
+            node.children.add(index, instance)
+          }
         }
       }
 
@@ -47,11 +48,15 @@ internal class MapNodeApplier(private val style: Style) : AbstractApplier<MapNod
 
   override fun onClear() {
     (root as? RootNode)?.run {
-      children.forEach { sourceNode ->
-        sourceNode.layers.forEach { layerNode ->
-          style.removeLayer(layerNode.id)
+      children.forEach { node ->
+        if (node is SourceNode) {
+          node.layers.forEach { layerNode ->
+            style.removeLayer(layerNode.id)
+          }
+          style.removeSource(node.id)
+        } else if (node is LayerNode) {
+          style.removeLayer(node.id)
         }
-        style.removeSource(sourceNode.id)
       }
       children.clear()
     }
@@ -69,10 +74,13 @@ internal class MapNodeApplier(private val style: Style) : AbstractApplier<MapNod
       }
 
       is RootNode -> {
-        val source = node.children[index]
-        source.layers.forEach { layerNode -> style.removeLayer(layerNode.id) }
-        style.removeLayer(source.id)
-
+        val child = node.children[index]
+        if (child is SourceNode) {
+          child.layers.forEach { layerNode -> style.removeLayer(layerNode.id) }
+          style.removeSource(child.id)
+        } else if (child is LayerNode) {
+          style.removeLayer(child.id)
+        }
         node.children.removeAt(index)
       }
     }

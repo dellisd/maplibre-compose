@@ -9,6 +9,7 @@ import androidx.compose.animation.AnimatedContent
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import ca.derekellis.maplibre.samples.BasicSample
+import ca.derekellis.maplibre.samples.NoStyleSample
 import ca.derekellis.maplibre.samples.StylesSample
 import ca.derekellis.maplibre.ui.theme.MapLibreComposeTheme
 import com.mapbox.mapboxsdk.Mapbox
@@ -49,6 +50,7 @@ class MainActivity : ComponentActivity() {
             Screen.Home -> HomeScreen(navigator)
             Screen.BasicSample -> BasicSample(navigator)
             Screen.StylesSample -> StylesSample(navigator)
+            Screen.NoStylesSample -> NoStyleSample(navigator)
           }
         }
       }

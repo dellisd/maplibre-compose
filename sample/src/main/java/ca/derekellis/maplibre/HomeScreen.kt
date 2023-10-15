@@ -38,6 +38,9 @@ fun HomeScreen(navigator: Navigator) {
       Button(onClick = { navigator.goTo(Screen.StylesSample) }) {
         Text(text = "Styling Sample")
       }
+      Button(onClick = { navigator.goTo(Screen.NoStylesSample) }) {
+        Text(text = "No Style Sample")
+      }
     }
   }
 }

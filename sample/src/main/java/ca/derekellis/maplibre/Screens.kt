@@ -6,4 +6,6 @@ sealed interface Screen {
   data object BasicSample : Screen
 
   data object StylesSample : Screen
+
+  data object NoStylesSample : Screen
 }
