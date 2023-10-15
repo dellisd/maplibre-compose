@@ -1,7 +1,11 @@
 package ca.derekellis.maplibre
 
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
+import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.unit.LayoutDirection
+import androidx.compose.ui.unit.dp
 import com.mapbox.mapboxsdk.camera.CameraPosition
 import com.mapbox.mapboxsdk.camera.CameraUpdateFactory
 import com.mapbox.mapboxsdk.geometry.LatLng
@@ -15,6 +19,7 @@ public class MapState(
   private val initialZoom: Double = 0.0,
   private val initialBearing: Double = 0.0,
   private val initialTilt: Double = 0.0,
+  private val initialPadding: DoubleArray = doubleArrayOf(0.0, 0.0, 0.0, 0.0)
 ) {
   private var _map: MapboxMap? = null
     get() {
@@ -30,6 +35,7 @@ public class MapState(
       .zoom(initialZoom)
       .bearing(initialBearing)
       .tilt(initialTilt)
+      .padding(initialPadding)
       .build()
   }
 
@@ -86,7 +92,17 @@ public fun rememberMapState(
   target: LatLng = LatLng(),
   zoom: Double = 0.0,
   bearing: Double = 0.0,
-  tilt: Double = 0.0
+  tilt: Double = 0.0,
+  padding: PaddingValues = PaddingValues(0.dp),
 ): MapState {
-  return remember { MapState(target, zoom, bearing, tilt) }
+  val paddingValues = LocalDensity.current.run {
+     doubleArrayOf(
+      padding.calculateLeftPadding(LayoutDirection.Ltr).toPx().toDouble(),
+      padding.calculateTopPadding().toPx().toDouble(),
+      padding.calculateRightPadding(LayoutDirection.Ltr).toPx().toDouble(),
+      padding.calculateBottomPadding().toPx().toDouble(),
+    )
+  }
+
+  return remember { MapState(target, zoom, bearing, tilt, paddingValues) }
 }
