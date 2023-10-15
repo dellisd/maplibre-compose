@@ -73,6 +73,7 @@ fun StylesSample(navigator: Navigator) {
         modifier = Modifier.fillMaxSize(),
         style = DemoStyle.Default.url,
         state = mapState,
+        contentPadding = innerPadding,
       ) {
         GeoJsonSource(
           id = "sample",

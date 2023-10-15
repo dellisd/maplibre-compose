@@ -39,6 +39,7 @@ fun NoStyleSample(navigator: Navigator) {
     MapLibreMap(
       modifier = Modifier.consumeWindowInsets(innerPadding),
       style = "",
+      contentPadding = innerPadding,
     ) {
       BackgroundLayer(id = "background") {
         backgroundColor(color = Color.White)
