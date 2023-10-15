@@ -27,6 +27,7 @@ import ca.derekellis.maplibre.MapLibreMap
 import ca.derekellis.maplibre.layers.CircleLayer
 import ca.derekellis.maplibre.rememberMapState
 import ca.derekellis.maplibre.sources.GeoJsonSource
+import ca.derekellis.maplibre.styles.circleRadius
 import com.mapbox.mapboxsdk.geometry.LatLng
 import kotlinx.coroutines.launch
 import java.net.URI
@@ -56,7 +57,9 @@ fun BasicSample() {
             id = "test",
             uri = URI.create("https://raw.githubusercontent.com/RailFansCanada/RailFansMap/master/data/ottawa/line1.json")
           ) {
-            CircleLayer(id = "test")
+            CircleLayer(id = "test") {
+              circleRadius(radius = 10f)
+            }
           }
         }
       }
