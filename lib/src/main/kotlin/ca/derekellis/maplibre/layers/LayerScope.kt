@@ -1,9 +1,9 @@
 package ca.derekellis.maplibre.layers
 
-import ca.derekellis.maplibre.StyleScope
+import ca.derekellis.maplibre.MapScope
 import com.mapbox.mapboxsdk.style.layers.Layer
 
 @LayerDsl
-public interface LayerScope<T : Layer> : StyleScope {
+public interface LayerScope<T : Layer> : MapScope {
   public val layer: T
 }

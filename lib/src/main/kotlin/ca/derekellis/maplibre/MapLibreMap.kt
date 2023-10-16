@@ -36,7 +36,7 @@ public fun MapLibreMap(
   logoPadding: PaddingValues = computeLogoPadding(contentPadding),
   attributionPadding: PaddingValues = computeAttributionPadding(logoPadding),
   compassPadding: PaddingValues = computeCompassPadding(contentPadding),
-  content: @Composable StyleScope.() -> Unit = {},
+  content: @Composable MapScope.() -> Unit = {},
 ) {
   val density = LocalDensity.current
   val layoutDirection = LocalLayoutDirection.current

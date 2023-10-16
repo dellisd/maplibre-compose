@@ -75,7 +75,11 @@ fun BasicSample(navigator: Navigator) {
       Row(
         modifier = Modifier
           .fillMaxWidth()
-          .padding(bottom = WindowInsets.navigationBars.asPaddingValues().calculateBottomPadding() + 32.dp),
+          .padding(
+            bottom = WindowInsets.navigationBars
+              .asPaddingValues()
+              .calculateBottomPadding() + 32.dp,
+          ),
         horizontalArrangement = Arrangement.SpaceAround,
       ) {
         Button(onClick = {

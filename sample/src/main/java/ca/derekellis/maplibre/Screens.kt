@@ -8,4 +8,6 @@ sealed interface Screen {
   data object StylesSample : Screen
 
   data object NoStylesSample : Screen
+
+  data object MapCallbackSample : Screen
 }

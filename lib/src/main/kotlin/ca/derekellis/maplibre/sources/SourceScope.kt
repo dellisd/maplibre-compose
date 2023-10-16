@@ -1,8 +1,8 @@
 package ca.derekellis.maplibre.sources
 
-import ca.derekellis.maplibre.StyleScope
+import ca.derekellis.maplibre.MapScope
 
 @SourceDsl
-public interface SourceScope : StyleScope {
+public interface SourceScope : MapScope {
   public val sourceId: String
 }

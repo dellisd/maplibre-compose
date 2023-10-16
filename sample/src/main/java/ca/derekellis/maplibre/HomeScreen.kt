@@ -39,6 +39,9 @@ fun HomeScreen(navigator: Navigator) {
       Button(onClick = { navigator.goTo(Screen.NoStylesSample) }) {
         Text(text = "No Style Sample")
       }
+      Button(onClick = { navigator.goTo(Screen.MapCallbackSample) }) {
+        Text(text = "Map Callback Sample")
+      }
     }
   }
 }
